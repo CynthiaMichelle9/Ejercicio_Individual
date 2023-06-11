@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Usuarios {% endblock %}
+
+{% block contenido %}
+<h1 class="titulo">Usuarios registrados</h1>
+{% include "tables/usertable.html" %}
+{% endblock %}

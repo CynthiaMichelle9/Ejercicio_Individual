@@ -1,0 +1,52 @@
+.btn-personal {
+    background-color: rgb(173, 180, 209);
+    color: white
+}
+
+ul,
+li {
+    display: inline-block;
+}
+
+footer {
+    font-size: medium;
+    font-weight: bold;
+    background-color: rgb(174, 176, 190);
+}
+
+h1 {
+    font-size: 30px;
+    margin: 20px;
+    padding: 15px;
+
+}
+
+.novedades {
+    margin: 20px;
+    padding: 15px;
+}
+
+.ofertas {
+    margin: 20px;
+    padding: 15px;
+}
+
+
+.table {
+    margin: 20px;
+    padding: 15px;
+
+}
+
+.navbar {
+    background-color: #d7d2e2;
+}
+
+body {
+    background-color: rgb(255, 243, 255);
+}
+
+.registrate {
+    color:rgb(181, 137, 228);
+    font-weight: bold;
+}
