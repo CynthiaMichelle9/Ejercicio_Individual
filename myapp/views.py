@@ -1,8 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from django.views.generic import TemplateView
-from django.contrib import admin 
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from .models import Usuario
-from myapp.forms import FormularioRegistro
+from myapp.forms import FormularioRegistro, LoginForm
 
 
 # Create your views here.
@@ -60,3 +63,22 @@ class RegistroView(TemplateView):
 
         return render(request, self.template_name, {"formulario": form, "mensaje": mensaje })
 
+class SesionView(TemplateView):
+    template_name = 'registration/login.html'
+
+    def get(self, request, *arg, **kwargs):
+        form = LoginForm
+        return render(request, self.template_name,{"formulario": form})
+    
+    def post(self, request, *args, **kwargs):
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return redirect('Home')
+        form.add_error(None, 'Credenciales incorrectas')  # Agrega un error general al formulario
+        return render(request, self.template_name, {"formulario": form})
