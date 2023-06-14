@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from django.views.generic import TemplateView
+from django.contrib import admin 
 from .models import Usuario
 from myapp.forms import FormularioRegistro
 
@@ -38,14 +38,15 @@ class RegistroView(TemplateView):
         }
 
         if form.is_valid():
-            
+            username =form.cleaned_data['nombre de usuario']
             nombre =form.cleaned_data['nombre']
             apellido =form.cleaned_data['apellido']
             email =form.cleaned_data['email']
             telefono =form.cleaned_data['telefono']
 
             registrarusuario = Usuario(
-                
+
+                username=username,
                 nombre=nombre,
                 apellido=apellido,
                 email=email, 
@@ -58,3 +59,4 @@ class RegistroView(TemplateView):
             mensaje =  {"enviado": True, "resultado": form.errors}
 
         return render(request, self.template_name, {"formulario": form, "mensaje": mensaje })
+

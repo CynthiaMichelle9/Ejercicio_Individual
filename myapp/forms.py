@@ -2,6 +2,15 @@ from django import forms
 
 
 class FormularioRegistro(forms.Form):
+    username = forms.CharField(label='Nombre de usuario', required=True, max_length=15, 
+                             error_messages={
+                                 'required': 'El nombre de usuario es obligatorio',
+                                 'max_length': 'El nombre de usaurio es muy largo, restringir a 15 caracteres',
+                             },
+                             widget=forms.TextInput(attrs={
+                                'placeholder': 'Ingrese su nombre de usuario', 
+                                'class':'form-control'
+                             }))
     nombre = forms.CharField(label='Nombre', required=True, max_length=30, 
                              error_messages={
                                  'required': 'El nombre es obligatorio',
