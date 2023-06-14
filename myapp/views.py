@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from .models import Usuario
 from myapp.forms import FormularioRegistro, LoginForm
+from django.utils.decorators import method_decorator
 
 
 # Create your views here.
@@ -79,6 +80,19 @@ class SesionView(TemplateView):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return redirect('Home')
+                    return redirect('Micuenta')
         form.add_error(None, 'Credenciales incorrectas')  # Agrega un error general al formulario
         return render(request, self.template_name, {"formulario": form})
+
+@method_decorator(login_required, name='dispatch')
+class MicuentaView(TemplateView):
+    template_name = 'micuenta.html'
+    @login_required
+    def bienvenida(request):
+        username = request.user.username
+        return render(request, 'micuenta.html', {'username': username})
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['username'] = self.request.user.get_username()
+        return context

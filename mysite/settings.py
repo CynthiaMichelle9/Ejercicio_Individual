@@ -125,7 +125,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = 'Home'
+LOGIN_REDIRECT_URL = 'Micuenta'
 LOGOUT_REDIRECT_URL = 'Login'
 LOGIN_URL ='Login'
 LOGOUT_URL = 'Logout'
