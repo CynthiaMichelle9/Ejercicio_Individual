@@ -1,4 +1,4 @@
-# Ejercicio Indiviudal 5.
+# Ejercicio Individual 5.
 ## Funcionalidades de mi aplicación: Login/logout y restricciones incorporadas.
 
 Este archivo README proporciona una explicación del desarrollo de la funcionalidad de login/logout en mi página web e incluye la explicación detallada de las restricciones de acceso creadas. 
