@@ -9,6 +9,7 @@ from myapp.forms import FormularioRegistro, LoginForm
 from django.utils.decorators import method_decorator
 
 
+
 # Create your views here.
 class IndexView(TemplateView):
     template_name='index.html'
@@ -67,22 +68,24 @@ class RegistroView(TemplateView):
 class SesionView(TemplateView):
     template_name = 'registration/login.html'
 
-    def get(self, request, *arg, **kwargs):
-        form = LoginForm
-        return render(request, self.template_name,{"formulario": form})
+    def get(self, request, *args, **kwargs):
+      form = LoginForm()
+      return render(request, self.template_name, { "form": form })
     
     def post(self, request, *args, **kwargs):
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    return redirect('Micuenta')
-        form.add_error(None, 'Credenciales incorrectas')  # Agrega un error general al formulario
-        return render(request, self.template_name, {"formulario": form})
+      form = LoginForm(request.POST)
+      if form.is_valid():
+        username = form.cleaned_data['username']
+        password = form.cleaned_data['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+          if user.is_active:
+            login(request, user)
+            return redirect('Micuenta')
+        form.add_error('username', 'El nombre de usuario o la contraseña son incorrectos. Por favor, inténtalo nuevamente.')
+        return render(request, self.template_name, { "form": form })
+      else:
+        return render(request, self.template_name, { "form": form })
 
 @method_decorator(login_required, name='dispatch')
 class MicuentaView(TemplateView):

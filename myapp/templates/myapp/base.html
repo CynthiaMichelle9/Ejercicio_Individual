@@ -18,7 +18,8 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg"">
+        {% block navbar%}
+        <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{% url 'Home' %}"><img src="{% static 'assets/images/circlelogo.png'%}"
                         alt="logo" width="60px" height="auto"></a>
@@ -55,6 +56,28 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'Usuarios' %}">Usuarios</a>
                         </li>
+
+
+                        {% if user.is_authenticated %}
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Mi cuenta
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Mis compras</a></li>
+                                <li><a class="dropdown-item" href="#">Favoritos</a></li>
+                                <li><a class="dropdown-item" href="#">Datos personales</a></li>
+                                <li><a class="dropdown-item" href="#">Datos bancarios </a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'Logout' %}">Cerrar sesión</a>
+                        </li>
+                        
+                        {% endif %}
                     </ul>
                     <form class="d-flex" role="search">
                         <input class="form-control me-2" type="search" placeholder="Buscar en la página"
@@ -64,14 +87,14 @@
                 </div>
             </div>
         </nav>
-        {% block titulo %}
-        {% endblock %}
+        {% endblock navbar %}
 
     </header>
     <div class="container text-body-secondary text-center">
         <img src="{% static 'assets/images/logotransparente.png' %}" alt="logotransparente" class="logoprincipal">
     </div>
     {% block contenido%}
+
     {% endblock %}
 
     <br>
@@ -80,20 +103,20 @@
         <div class="container text-body-secondary text-center">
             <p>Síguenos en nuestras redes sociales</p>
             <a class="d-inline-flex align-items-center mb-2 text-body-emphasis text-decoration-none"
-                href="https://www.instagram.com/"><img src="{% static 'assets/images/redes/instagram.png'%}" alt=" instagram"
-                    width="50px" height="auto">
+                href="https://www.instagram.com/"><img src="{% static 'assets/images/redes/instagram.png'%}"
+                    alt=" instagram" width="50px" height="auto">
             </a>
             <a class="d-inline-flex align-items-center mb-2 text-body-emphasis text-decoration-none"
-                href="https://www.facebook.com/"><img src="{% static 'assets/images/redes/facebook.png'%}" alt=" facebook"
-                    width="50px" height="auto">
+                href="https://www.facebook.com/"><img src="{% static 'assets/images/redes/facebook.png'%}"
+                    alt=" facebook" width="50px" height="auto">
             </a>
             <a class="d-inline-flex align-items-center mb-2 text-body-emphasis text-decoration-none"
-                href="https://www.tiktok.com/"><img src="{% static 'assets/images/redes/tiktok.png'%}" alt=" tiktok" width="50px"
-                    height="auto">
+                href="https://www.tiktok.com/"><img src="{% static 'assets/images/redes/tiktok.png'%}" alt=" tiktok"
+                    width="50px" height="auto">
             </a>
             <a class="d-inline-flex align-items-center mb-2 text-body-emphasis text-decoration-none"
                 href="https://www.twitter.com/">
-            <img src="{% static 'assets/images/redes/twitter.png'%}" alt="twitter" width="50px" height="auto">
+                <img src="{% static 'assets/images/redes/twitter.png'%}" alt="twitter" width="50px" height="auto">
             </a>
             <p>Copyright &copy; Aurora Handmade knits</p>
         </div>
@@ -102,4 +125,3 @@
 </body>
 
 </html>
-
