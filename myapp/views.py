@@ -43,7 +43,7 @@ class RegistroView(TemplateView):
         }
 
         if form.is_valid():
-            username =form.cleaned_data['nombre de usuario']
+            username =form.cleaned_data['username']
             nombre =form.cleaned_data['nombre']
             apellido =form.cleaned_data['apellido']
             email =form.cleaned_data['email']
